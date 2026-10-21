@@ -67,3 +67,32 @@ header{
 #personal-best-value{
     color: var(--neutral-0);
 }
+
+/* statistics
+----------------------------------------------------------------------------------- */
+
+.statistics{
+    display:flex;
+    justify-content: space-evenly;
+    margin-top: 16px;
+    
+}
+
+.statistics p{
+    color: var(--neutral-400);
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid var(--neutral-500);
+    flex-grow: 1;
+}
+
+.statistics p:last-of-type{
+    border-right: 0;
+}
+
+.statistics span{
+    color: var(--neutral-0);
+    font-weight: 700;
+    font-size: 1.2rem;
+}
