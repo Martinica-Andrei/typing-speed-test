@@ -26,7 +26,14 @@ body {
     font-family: "Sora", sans-serif;
     font-size: 1rem;
     background-color: var(--neutral-900);
-    color: var(--neutral-0)
+    color: var(--neutral-0);
+    padding:0;
+    margin:0;
+}
+
+h1,h2,h3,h4,h5,h6,p,button,option{
+    margin:0;
+    padding:0;
 }
 
 .sr-only {
@@ -38,4 +45,25 @@ body {
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     border: 0;
+}
+
+/* header
+----------------------------------------------------------------------------------- */
+
+header{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:6px;
+}
+
+.personal-best{
+    display:flex;
+    align-items: center;
+    gap:8px;
+    color:var(--neutral-400);
+}
+
+#personal-best-value{
+    color: var(--neutral-0);
 }
