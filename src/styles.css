@@ -25,6 +25,8 @@
 body {
     font-family: "Sora", sans-serif;
     font-size: 1rem;
+    background-color: var(--neutral-900);
+    color: var(--neutral-0)
 }
 
 .sr-only {
