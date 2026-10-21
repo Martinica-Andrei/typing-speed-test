@@ -27,13 +27,21 @@ body {
     font-size: 1rem;
     background-color: var(--neutral-900);
     color: var(--neutral-0);
-    padding:0;
-    margin:0;
+    padding: 0;
+    margin: 0;
 }
 
-h1,h2,h3,h4,h5,h6,p,button,option{
-    margin:0;
-    padding:0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+button,
+option {
+    margin: 0;
+    padding: 0;
 }
 
 .sr-only {
@@ -50,48 +58,48 @@ h1,h2,h3,h4,h5,h6,p,button,option{
 /* header
 ----------------------------------------------------------------------------------- */
 
-header{
-    display:flex;
+header {
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    padding:6px;
+    padding: 6px;
 }
 
-.personal-best{
-    display:flex;
+.personal-best {
+    display: flex;
     align-items: center;
-    gap:8px;
-    color:var(--neutral-400);
+    gap: 8px;
+    color: var(--neutral-400);
 }
 
-#personal-best-value{
+#personal-best-value {
     color: var(--neutral-0);
 }
 
 /* statistics
 ----------------------------------------------------------------------------------- */
 
-.statistics{
-    display:flex;
+.statistics {
+    display: flex;
     justify-content: space-evenly;
     margin-top: 16px;
-    
+
 }
 
-.statistics p{
+.statistics p {
     color: var(--neutral-400);
-    display:flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
     border-right: 1px solid var(--neutral-500);
     flex-grow: 1;
 }
 
-.statistics p:last-of-type{
+.statistics p:last-of-type {
     border-right: 0;
 }
 
-.statistics span{
+.statistics span {
     color: var(--neutral-0);
     font-weight: 700;
     font-size: 1.2rem;
@@ -100,24 +108,38 @@ header{
 /* options
 ----------------------------------------------------------------------------------- */
 
-.options{
-    display:flex;
-    padding:6px;
+.options {
+    display: flex;
+    padding: 6px;
     margin-top: 8px;
-    gap:8px;
+    gap: 8px;
 }
 
-.option{
+.option {
     flex-grow: 1;
 }
 
-.option select{
-    width:100%;
+.option select {
+    width: 100%;
     text-align: center;
     background-color: var(--neutral-900);
     color: var(--neutral-0);
-    font-size:1rem;
+    font-size: 1rem;
     border-radius: 4px;
-    border:1px solid var(--neutral-400);
-    padding:3px;
+    border: 1px solid var(--neutral-400);
+    padding: 3px;
+}
+
+/* start-section
+----------------------------------------------------------------------------------- */
+
+.start-section {
+    display: none;
+}
+
+/* test-complete-section
+----------------------------------------------------------------------------------- */
+
+.test-complete-section{
+    display: none;
 }
