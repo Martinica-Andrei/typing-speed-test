@@ -1,57 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  
+
   <title>Frontend Mentor | Typing Speed Test</title>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 0.6875rem; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
+  <link rel="stylesheet" href="src/styles.css">
 </head>
+
 <body>
+  <header aria-labelledby="title">
+    <h1 id="title" class="sr-only">Typing Speed Test</h1>
+    <p>Personal best: <!-- PB --> WPM</p>
+  </header>
 
-  Personal best: <!-- PB --> WPM
+  <section aria-label="Statistics">
+    <p>WPM: <!-- WPM --></p>
+    <p>Accuracy: <!-- Accuracy --></p>
+    <p>Time: <!-- Time --></p>
+  </section>
 
-  WPM: <!-- WPM -->
-  Accuracy: <!-- Accuracy -->
-  Time: <!-- Time -->
+  <section aria-label="Options">
+    <div>
+      <label for="difficulty">Difficulty:</label>
+      <select id="difficulty">
+        <option value="easy">Easy</option>
+        <option value="medium" selected>Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+    </div>
+    <div>
+      <label for="mode">Mode:</label>
+      <select id="mode">
+        <option value="passage" selected>Passage</option>
+        <option value="15s">15s</option>
+        <option value="30s">30s</option>
+        <option value="60s">60s</option>
+        <option value="120s">120s</option>
+      </select>
+    </div>
+  </section>
 
-  Difficulty:
-  Easy
-  Medium
-  Hard
+  <section aria-labelledby="start-btn">
+    <button type="button" id="start-btn">Start Typing Test</button>
+    <p>Or click the text and start typing</p>
+  </section>
 
-  Mode:
-  Timed (60s)
-  Passage
+  <section aria-labelledby="test-complete">
+    <h2 id="test-complete">Test Complete!</h2>
+    <p>Solid run. Keep pushing to beat your high score.</p>
 
-  <!-- Passage -->
+    <div>
+      <p>WPM:</p>
+      <p></p>
+    </div>
+    <div>
+      <p>Accuracy:</p>
+      <p></p>
+    </div>
+    <div>
+      <p>Characters:</p>
+      <p></p>
+    </div>
 
-  Start Typing Test
-  Or click the text and start typing
+    <button type="button" id="go-again-btn">Go Again</button>
+  </section>
 
-  <!-- Test Complete Start -->
-
-  Test Complete!
-  Solid run. Keep pushing to beat your high score.
-
-  WPM: <!-- WPM -->
-  Accuracy: <!-- Accuracy -->
-  Characters: <!-- Correct/Incorrect -->
-
-  Go Again
-  
-  <!-- Test Complete End -->
-
-  <footer class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </footer>
 </body>
+
 </html>
