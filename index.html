@@ -19,46 +19,53 @@
 </head>
 
 <body>
-  <header aria-labelledby="title">
-    <h1 id="title" class="sr-only">Typing Speed Test</h1>
-    <img src="assets/images/logo-small.svg" alt="">
-    <div class="personal-best">
-      <img src="assets/images/icon-personal-best.svg" alt="">
-      <p class="personal-best">Personal best:<span id="personal-best-value"></span></p>
-    </div>
-  </header>
+  <div class="content">
+    <div>
+      <header aria-labelledby="title">
+        <h1 id="title" class="sr-only">Typing Speed Test</h1>
+        <img src="assets/images/logo-small.svg" alt="">
+        <div class="personal-best">
+          <img src="assets/images/icon-personal-best.svg" alt="">
+          <p class="personal-best">Personal best:<span id="personal-best-value"></span></p>
+        </div>
+      </header>
 
-  <section class="statistics" aria-label="Statistics">
-    <p>WPM: <span id="wpm-value"></span></p>
-    <p>Accuracy: <span id="accuracy-value"></span></p>
-    <p>Time: <span id="time-value"></span></p>
-  </section>
+      <section class="statistics" aria-label="Statistics">
+        <p>WPM: <span id="wpm-value"></span></p>
+        <p>Accuracy: <span id="accuracy-value"></span></p>
+        <p>Time: <span id="time-value"></span></p>
+      </section>
 
-  <section class="options" aria-label="Options">
-    <div class="option">
-      <label for="difficulty" class="sr-only">Difficulty:</label>
-      <select id="difficulty">
-        <option value="easy">Easy</option>
-        <option value="medium" selected>Medium</option>
-        <option value="hard">Hard</option>
-      </select>
+      <section class="options" aria-label="Options">
+        <div class="option">
+          <label for="difficulty" class="sr-only">Difficulty:</label>
+          <select id="difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium" selected>Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+        <div class="option">
+          <label for="mode" class="sr-only">Mode:</label>
+          <select id="mode">
+            <option value="passage" selected>Passage</option>
+            <option value="15s">15s</option>
+            <option value="30s">30s</option>
+            <option value="60s">60s</option>
+            <option value="120s">120s</option>
+          </select>
+        </div>
+      </section>
     </div>
-    <div class="option">
-      <label for="mode" class="sr-only">Mode:</label>
-      <select id="mode">
-        <option value="passage" selected>Passage</option>
-        <option value="15s">15s</option>
-        <option value="30s">30s</option>
-        <option value="60s">60s</option>
-        <option value="120s">120s</option>
-      </select>
-    </div>
-  </section>
 
-  <section class="start-section" aria-labelledby="start-btn">
-    <button type="button" id="start-btn">Start Typing Test</button>
-    <p>Or click the text and start typing</p>
-  </section>
+    <div class="content-bottom">
+      <section class="start-section" aria-labelledby="start-btn">
+        <button type="button" id="start-btn">Start Typing Test</button>
+        <p>Or click the text and start typing</p>
+      </section>
+    </div>
+  </div>
+
 
   <section class="test-complete-section" aria-labelledby="test-complete">
     <h2 id="test-complete">Test Complete!</h2>

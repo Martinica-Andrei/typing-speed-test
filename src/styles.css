@@ -22,7 +22,12 @@
     --yellow-400: hsl(49, 85%, 70%);
 }
 
+html{
+    height: 100%;
+}
+
 body {
+    height: 100%;
     font-family: "Sora", sans-serif;
     font-size: 1rem;
     background-color: var(--neutral-900);
@@ -53,6 +58,16 @@ option {
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     border: 0;
+}
+
+/* content
+----------------------------------------------------------------------------------- */
+
+.content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 /* header
@@ -130,16 +145,30 @@ header {
     padding: 3px;
 }
 
+/* content-bottom
+----------------------------------------------------------------------------------- */
+.content-bottom {
+    position: relative;
+    flex: 1 0 0;
+}
+
 /* start-section
 ----------------------------------------------------------------------------------- */
 
 .start-section {
-    display: none;
+    backdrop-filter: blur(5px);
+    position: relative;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 /* test-complete-section
 ----------------------------------------------------------------------------------- */
 
-.test-complete-section{
+.test-complete-section {
     display: none;
 }
