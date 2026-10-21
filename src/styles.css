@@ -96,3 +96,27 @@ header{
     font-weight: 700;
     font-size: 1.2rem;
 }
+
+/* options
+----------------------------------------------------------------------------------- */
+
+.options{
+    display:flex;
+    padding:6px;
+    margin-top: 8px;
+    gap:8px;
+}
+
+.option{
+    flex-grow: 1;
+}
+
+.option select{
+    width:100%;
+    text-align: center;
+    background-color: var(--neutral-900);
+    color: var(--neutral-0);
+    font-size:1rem;
+    border-radius: 8px;
+    border:1px solid var(--neutral-400);
+}

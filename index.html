@@ -24,7 +24,7 @@
     <img src="assets/images/logo-small.svg" alt="">
     <div class="personal-best">
       <img src="assets/images/icon-personal-best.svg" alt="">
-      <p class="personal-best">Personal best:<span id="personal-best-value"> 3 WPM</span></p>
+      <p class="personal-best">Personal best:<span id="personal-best-value"></span></p>
     </div>
   </header>
 
@@ -34,17 +34,17 @@
     <p>Time: <span id="time-value"></span></p>
   </section>
 
-  <section aria-label="Options">
-    <div>
-      <label for="difficulty">Difficulty:</label>
+  <section class="options" aria-label="Options">
+    <div class="option">
+      <label for="difficulty" class="sr-only">Difficulty:</label>
       <select id="difficulty">
         <option value="easy">Easy</option>
         <option value="medium" selected>Medium</option>
         <option value="hard">Hard</option>
       </select>
     </div>
-    <div>
-      <label for="mode">Mode:</label>
+    <div class="option">
+      <label for="mode" class="sr-only">Mode:</label>
       <select id="mode">
         <option value="passage" selected>Passage</option>
         <option value="15s">15s</option>
