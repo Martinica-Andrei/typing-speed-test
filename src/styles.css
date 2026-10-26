@@ -163,7 +163,7 @@ header {
     backdrop-filter: blur(5px);
     position: relative;
     height: 100%;
-    z-index: 1;
+    z-index: 900;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -222,6 +222,7 @@ header {
 .text-to-type-input {
     position: absolute;
     top: 0;
+    z-index: 1;
     width: 100%;
     height: 100%;
     opacity: 0;
