@@ -1,68 +1,90 @@
-export class TypingSession{
-    constructor(){
+export class TypingSession {
+    constructor() {
         this._wpm = 0;
-        this._currentTimeSeconds = 0;
+        this._currentTimeMs = 0;
         this._text = "";
         this._wpmEl = null;
         this._accuracyEl = null;
         this._timeEl = null;
         this._textToTypeEl = null;
+        this._intervalId = null;
     }
 
-    getAccuracy(){
+    getAccuracy() {
         return 100;
     }
 
     setElements(
-        wpmEl, 
-        accuracyEl, 
+        wpmEl,
+        accuracyEl,
         timeEl,
-        textToTypeEl){
+        textToTypeEl) {
         this._wpmEl = wpmEl;
         this._accuracyEl = accuracyEl;
         this._timeEl = timeEl;
         this._textToTypeEl = textToTypeEl;
     }
 
-    setCurrentTimeSeconds(value){
-        this._currentTimeSeconds = value;
+    setCurrentTimeMs(value) {
+        this._currentTimeMs = value;
     }
 
-    setText(value){
+    setText(value) {
         this._text = value;
     }
 
-    updateElements(){
+    updateElements() {
         this.updateWpmEl();
         this.updateAccuracyEl();
         this.updateTimeEl();
         this.updateTextToTypeEl();
     }
 
-    updateWpmEl(){
+    updateWpmEl() {
         this._wpmEl.textContent = this._wpm;
     }
 
-    updateAccuracyEl(){
+    updateAccuracyEl() {
         this._accuracyEl.textContent = this.getAccuracy() + "%";
     }
 
-    updateTimeEl(){
-        if (this._currentTimeSeconds === "passage"){
-           this._timeEl.textContent = "-"; 
+    updateTimeEl() {
+        if (this._currentTimeMs === "passage") {
+            this._timeEl.textContent = "-";
         }
-        else{
-            let seconds = this._currentTimeSeconds % 60;
+        else {
+            const currentTimeSeconds = Math.ceil(this._currentTimeMs / 1000);
+            let seconds = currentTimeSeconds % 60;
             seconds = seconds > 9 ? seconds : `0${seconds}`;
 
-            let minutes = Math.floor(this._currentTimeSeconds / 60);
+            let minutes = Math.floor(currentTimeSeconds / 60);
             minutes = minutes > 9 ? minutes : `0${minutes}`;
 
             this._timeEl.textContent = `${minutes}:${seconds}`;
         }
     }
 
-    updateTextToTypeEl(){
+    updateTextToTypeEl() {
         this._textToTypeEl.value = this._text;
+    }
+
+    start() {
+        if (this._currentTimeMs !== "passage") {
+            const frameRateMs = 13;
+            let prevTimeMs = Date.now();
+            this._intervalId = setInterval(() => {
+                const passedMs = Date.now() - prevTimeMs;
+                prevTimeMs = Date.now();
+                this._currentTimeMs = Math.max(0, this._currentTimeMs - passedMs);
+                this.updateTimeEl();
+            }, frameRateMs)
+        }
+    }
+
+    stop(){
+        if (this._intervalId != null){
+            clearInterval(this._intervalId);
+            this._intervalId = null;
+        }
     }
 }
