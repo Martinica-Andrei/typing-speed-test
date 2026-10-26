@@ -238,7 +238,7 @@ export class TypingSession {
         const currentLetter = this._textToTypeEl.children[this._currentTextIndex];
         const rows = (currentLetter.offsetTop - this._lettersOffsetTopMin) / currentLetter.offsetHeight;
         if (rows >= minRowsToScroll){
-            this._textToTypeEl.scrollTop = (rows - minRowsToScroll + 1) * currentLetter.offsetHeight;
+            $("#text-to-type-with-input").scrollTop = (rows - minRowsToScroll + 1) * currentLetter.offsetHeight;
         }
     }
 }

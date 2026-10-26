@@ -199,20 +199,33 @@ header {
     flex-direction: column;
     gap: 32px;
     height: 100%;
+    padding-top: 16px;
     position: absolute;
     top: 0;
     height: 100%;
-    padding-top: 16px;
+}
+
+.text-to-type-with-input {
+    overflow-y: hidden;
+    height: 100%;
 }
 
 .text-to-type {
     font-size: 1.5rem;
     color: var(--neutral-400);
-    overflow-y: hidden;
 }
 
 .text-to-type span {
     white-space: pre-wrap;
+}
+
+.text-to-type-input {
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
 }
 
 .highlight-current-letter {
@@ -246,7 +259,7 @@ header {
     background-color: var(--neutral-800);
 }
 
-.text-to-type-restart-section button:hover{
+.text-to-type-restart-section button:hover {
     background-color: var(--neutral-500);
 }
 
