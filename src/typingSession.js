@@ -140,7 +140,7 @@ export class TypingSession {
         this._currentTimeMs = this._startTimeMs;
         this.setText(text);
 
-        this.updateTimeEl();
+        this.updateElements();
     }
 
     stop() {
