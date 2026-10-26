@@ -4,8 +4,8 @@ import { $ } from "./querySelector.js";
 
 const modeEl = $("#mode");
 const difficultyEl = $("#difficulty");
-const startBtnEl = $("#start-btn");
 const startSectionEl = $("#start-section");
+const textToTypeRestartSectionEl = $("#text-to-type-restart-section");
 
 const data = await loadData();
 
@@ -13,30 +13,39 @@ const typingSession = new TypingSession();
 
 modeEl.addEventListener("input", setTime);
 difficultyEl.addEventListener("input", setDifficulty);
-startBtnEl.addEventListener("click", start);
+startSectionEl.addEventListener("click", start);
+
+$("#restart-test-btn").addEventListener("click", e => {
+    typingSession.restart();
+    difficultyEl.disabled = false;
+    modeEl.disabled = false;
+    startSectionEl.style.display = "";
+    textToTypeRestartSectionEl.style.display = "";
+});
 
 init();
 
-function init(){
+function init() {
     setDifficulty();
     setTime();
     typingSession.updateElements();
 }
 
-function setDifficulty(){
+function setDifficulty() {
     const text = getRandomTextByDifficulty(data, difficultyEl.value);
     typingSession.setText(text);
 }
 
-function setTime(){
+function setTime() {
     const time = modeEl.value;
-    typingSession.setCurrentTimeMs(time === "passage" ? time : parseInt(time) * 1000);
+    typingSession.setStartTimeMs(time === "passage" ? time : parseInt(time) * 1000);
     typingSession.updateTimeEl();
 }
 
-function start(){
+function start() {
     difficultyEl.disabled = true;
     modeEl.disabled = true;
     startSectionEl.style.display = "none";
+    textToTypeRestartSectionEl.style.display = "flex";
     typingSession.start();
 }

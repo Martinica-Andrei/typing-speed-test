@@ -233,8 +233,8 @@ header {
 .text-to-type-restart-section {
     border-top: 1px solid var(--neutral-500);
     padding-top: 16px;
-    display: flex;
     justify-content: center;
+    display: none;
 }
 
 .text-to-type-restart-section button {

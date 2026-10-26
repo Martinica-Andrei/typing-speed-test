@@ -7,6 +7,7 @@ import { $ } from "./querySelector.js";
 export class TypingSession {
     constructor() {
         this._currentTimeMs = 0;
+        this._startTimeMs = 0;
         this._passedTimeMs = 0;
         this._text = "";
         this._wpmEl = $("#wpm-value");
@@ -35,18 +36,18 @@ export class TypingSession {
 
     getWpm() {
         const minutes = this._passedTimeMs / 1000 / 60;
-        console.log(minutes);
         if (minutes === 0) {
             return 0;
         }
         return Math.floor(this._typedCorrectlyCount / 5 / minutes);
     }
 
-    setCurrentTimeMs(value) {
+    setStartTimeMs(value) {
         if (this._state !== TYPING_SESSION_STATE_MENU) {
             return;
         }
         this._currentTimeMs = value;
+        this._startTimeMs = this._currentTimeMs;
     }
 
     setText(value) {
@@ -57,6 +58,7 @@ export class TypingSession {
         this._currentTextIndex = 0;
         this._typedCorrectlyCount = 0;
         this._typedCount = 0;
+        this._passedTimeMs = 0;
         this._initTextToTypeElContent();
     }
 
@@ -121,6 +123,20 @@ export class TypingSession {
         }, frameRateMs)
     }
 
+    restart() {
+        if (this._state !== TYPING_SESSION_STATE_RUNNING) {
+            return;
+        }
+        
+        this.stop();
+
+        this._state = TYPING_SESSION_STATE_MENU;
+        this.setText(this._text);
+        this._currentTimeMs = this._startTimeMs;
+
+        this.updateTimeEl();
+    }
+
     stop() {
         if (this._state !== TYPING_SESSION_STATE_RUNNING) {
             return;
@@ -132,6 +148,10 @@ export class TypingSession {
             document.removeEventListener("keydown", this._typeKeyHandlerWrapper);
         }
 
+        this._clearInterval();
+    }
+
+    _clearInterval() {
         if (this._intervalId != null) {
             clearInterval(this._intervalId);
             this._intervalId = null;
@@ -161,7 +181,7 @@ export class TypingSession {
         if (["Alt", "Shift", "Tab", "CapsLock", "Control"].includes(key)) {
             return;
         }
-        if (key === '\''){
+        if (key === '\'') {
             e.preventDefault();
         }
 
