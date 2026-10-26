@@ -137,6 +137,7 @@ export class TypingSession {
         this.stop();
 
         this._state = TYPING_SESSION_STATE_MENU;
+        this._currentTimeMs = this._startTimeMs;
         this.setText(this._text);
 
         this.updateTimeEl();
@@ -238,7 +239,7 @@ export class TypingSession {
         const minRowsToScroll = 2;
         const currentLetter = this._textToTypeEl.children[this._currentTextIndex];
         const rows = (currentLetter.offsetTop - this._lettersOffsetTopMin) / currentLetter.offsetHeight;
-        if (rows >= minRowsToScroll){
+        if (rows >= minRowsToScroll) {
             this._textToTypeWithInput.scrollTop = (rows - minRowsToScroll + 1) * currentLetter.offsetHeight;
         }
     }
