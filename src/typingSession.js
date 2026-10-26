@@ -1,3 +1,8 @@
+import {
+    TYPING_SESSION_STATE_MENU,
+    TYPING_SESSION_STATE_RUNNING,
+    TYPING_SESSION_STATE_FINISHED
+} from "./typingSessionState.js";
 export class TypingSession {
     constructor() {
         this._wpm = 0;
@@ -8,6 +13,7 @@ export class TypingSession {
         this._timeEl = null;
         this._textToTypeEl = null;
         this._intervalId = null;
+        this._state = TYPING_SESSION_STATE_MENU;
     }
 
     getAccuracy() {
@@ -26,10 +32,16 @@ export class TypingSession {
     }
 
     setCurrentTimeMs(value) {
+        if (this._state !== TYPING_SESSION_STATE_MENU) {
+            return;
+        }
         this._currentTimeMs = value;
     }
 
     setText(value) {
+        if (this._state !== TYPING_SESSION_STATE_MENU) {
+            return;
+        }
         this._text = value;
     }
 
@@ -69,22 +81,42 @@ export class TypingSession {
     }
 
     start() {
+        if (this._state !== TYPING_SESSION_STATE_MENU) {
+            return;
+        }
+
+        this._state = TYPING_SESSION_STATE_RUNNING;
+
         if (this._currentTimeMs !== "passage") {
             const frameRateMs = 13;
             let prevTimeMs = Date.now();
             this._intervalId = setInterval(() => {
-                const passedMs = Date.now() - prevTimeMs;
-                prevTimeMs = Date.now();
-                this._currentTimeMs = Math.max(0, this._currentTimeMs - passedMs);
-                this.updateTimeEl();
+                const timeNowMs = Date.now();
+                const deltaMs = timeNowMs - prevTimeMs;
+                prevTimeMs = timeNowMs;
+                this._loop(deltaMs)
             }, frameRateMs)
         }
     }
 
-    stop(){
-        if (this._intervalId != null){
+    stop() {
+        if (this._state !== TYPING_SESSION_STATE_RUNNING) {
+            return;
+        }
+
+        this._state = TYPING_SESSION_STATE_FINISHED;
+
+        if (this._intervalId != null) {
             clearInterval(this._intervalId);
             this._intervalId = null;
+        }
+    }
+
+    _loop(deltaMs) {
+        this._currentTimeMs = Math.max(0, this._currentTimeMs - deltaMs);
+        this.updateTimeEl();
+        if (this._currentTimeMs === 0) {
+            stop();
         }
     }
 }
