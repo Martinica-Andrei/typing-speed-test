@@ -3,32 +3,22 @@ import {
     TYPING_SESSION_STATE_RUNNING,
     TYPING_SESSION_STATE_FINISHED
 } from "./typingSessionState.js";
+import { $ } from "./querySelector.js";
 export class TypingSession {
     constructor() {
         this._wpm = 0;
         this._currentTimeMs = 0;
         this._text = "";
-        this._wpmEl = null;
-        this._accuracyEl = null;
-        this._timeEl = null;
-        this._textToTypeEl = null;
+        this._wpmEl = $("#wpm-value");
+        this._accuracyEl = $("#accuracy-value");
+        this._timeEl = $("#time-value");
+        this._textToTypeEl = $("#text-to-type");
         this._intervalId = null;
         this._state = TYPING_SESSION_STATE_MENU;
     }
 
     getAccuracy() {
         return 100;
-    }
-
-    setElements(
-        wpmEl,
-        accuracyEl,
-        timeEl,
-        textToTypeEl) {
-        this._wpmEl = wpmEl;
-        this._accuracyEl = accuracyEl;
-        this._timeEl = timeEl;
-        this._textToTypeEl = textToTypeEl;
     }
 
     setCurrentTimeMs(value) {
@@ -77,7 +67,9 @@ export class TypingSession {
     }
 
     updateTextToTypeEl() {
-        this._textToTypeEl.value = this._text;
+        const letters = this._text.split("").map(l => `<span>${l}</span>`);
+        
+        this._textToTypeEl.innerHTML = letters.join("");
     }
 
     start() {

@@ -196,12 +196,8 @@ header {
     position: absolute;
     top: 0;
     overflow-y: hidden;
-    background-color: inherit;
     border: 0;
-    color: var(--neutral-0);
-    width: 100%;
     font-size: 2rem;
-    resize:none;
     height: 100%;
 }
 

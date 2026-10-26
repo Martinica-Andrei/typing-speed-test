@@ -1,24 +1,15 @@
 import { loadData, getRandomTextByDifficulty } from "./dataRepository.js";
 import { TypingSession } from "./typingSession.js";
+import { $ } from "./querySelector.js";
 
-const $ = document.querySelector.bind(document);
-const wpmValueEl = $("#wpm-value");
-const accuracyValueEl = $("#accuracy-value");
-const timeValueEl = $("#time-value");
 const modeEl = $("#mode");
 const difficultyEl = $("#difficulty");
-const textToTypeEl = $("#text-to-type");
 const startBtnEl = $("#start-btn");
 const startSectionEl = $("#start-section");
 
 const data = await loadData();
 
 const typingSession = new TypingSession();
-typingSession.setElements(
-    wpmValueEl,
-    accuracyValueEl,
-    timeValueEl,
-    textToTypeEl);
 
 modeEl.addEventListener("input", setTime);
 difficultyEl.addEventListener("input", setDifficulty);
