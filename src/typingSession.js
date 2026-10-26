@@ -95,6 +95,8 @@ export class TypingSession {
     _initTextToTypeElContent() {
         const letters = this._text.split("").map(l => `<span>${l}</span>`);
         this._textToTypeEl.innerHTML = letters.join("");
+
+        this._lettersOffsetTopMin = this._textToTypeEl.children[0].offsetTop;
     }
 
 
@@ -103,6 +105,9 @@ export class TypingSession {
             return;
         }
         this._state = TYPING_SESSION_STATE_RUNNING;
+
+        this._textToTypeEl.scrollTop = 0;
+        this._currentTimeMs = this._startTimeMs;
 
         this._highlightCurrentLetter();
 
@@ -127,12 +132,11 @@ export class TypingSession {
         if (this._state !== TYPING_SESSION_STATE_RUNNING) {
             return;
         }
-        
+
         this.stop();
 
         this._state = TYPING_SESSION_STATE_MENU;
         this.setText(this._text);
-        this._currentTimeMs = this._startTimeMs;
 
         this.updateTimeEl();
     }
@@ -195,6 +199,7 @@ export class TypingSession {
             this._currentTextIndex--;
             this._textToTypeEl.children[this._currentTextIndex].className = "";
             this._highlightCurrentLetter();
+            this._processScroll();
             return;
         }
 
@@ -224,5 +229,16 @@ export class TypingSession {
             return;
         }
         this._highlightCurrentLetter();
+
+        this._processScroll();
+    }
+
+    _processScroll() {
+        const minRowsToScroll = 2;
+        const currentLetter = this._textToTypeEl.children[this._currentTextIndex];
+        const rows = (currentLetter.offsetTop - this._lettersOffsetTopMin) / currentLetter.offsetHeight;
+        if (rows >= minRowsToScroll){
+            this._textToTypeEl.scrollTop = (rows - minRowsToScroll + 1) * currentLetter.offsetHeight;
+        }
     }
 }
