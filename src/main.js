@@ -9,6 +9,7 @@ const modeEl = $("#mode");
 const difficultyEl = $("#difficulty");
 const textToTypeEl = $("#text-to-type");
 const startBtnEl = $("#start-btn");
+const startSectionEl = $("#start-section");
 
 const data = await loadData();
 
@@ -21,7 +22,7 @@ typingSession.setElements(
 
 modeEl.addEventListener("input", setTime);
 difficultyEl.addEventListener("input", setDifficulty);
-startBtnEl.addEventListener("click", () => typingSession.start());
+startBtnEl.addEventListener("click", start);
 
 init();
 
@@ -41,4 +42,11 @@ function setTime(){
     const time = modeEl.value;
     typingSession.setCurrentTimeMs(time === "passage" ? time : parseInt(time) * 1000);
     typingSession.updateTimeEl();
+}
+
+function start(){
+    difficultyEl.disabled = true;
+    modeEl.disabled = true;
+    startSectionEl.style.display = "none";
+    typingSession.start();
 }
