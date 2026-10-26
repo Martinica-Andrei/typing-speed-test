@@ -15,6 +15,10 @@ export class TypingSession {
         this._textToTypeEl = $("#text-to-type");
         this._intervalId = null;
         this._state = TYPING_SESSION_STATE_MENU;
+        this._currentTextIndex = 0;
+        this._typeKeyHandlerWrapper = null;
+        this._typedCorrectlyCount = 0;
+        this._typedCount = 0;
     }
 
     getAccuracy() {
@@ -33,13 +37,16 @@ export class TypingSession {
             return;
         }
         this._text = value;
+        this._currentTextIndex = 0;
+        this._typedCorrectlyCount = 0;
+        this._typedCount = 0;
+        this._initTextToTypeElContent();
     }
 
     updateElements() {
         this.updateWpmEl();
         this.updateAccuracyEl();
         this.updateTimeEl();
-        this.updateTextToTypeEl();
     }
 
     updateWpmEl() {
@@ -66,18 +73,22 @@ export class TypingSession {
         }
     }
 
-    updateTextToTypeEl() {
+    _initTextToTypeElContent() {
         const letters = this._text.split("").map(l => `<span>${l}</span>`);
-        
         this._textToTypeEl.innerHTML = letters.join("");
     }
+
 
     start() {
         if (this._state !== TYPING_SESSION_STATE_MENU) {
             return;
         }
-
         this._state = TYPING_SESSION_STATE_RUNNING;
+
+        this._highlightCurrentLetter();
+
+        this._typeKeyHandlerWrapper = e => this._typeKeyHandler(e.key);
+        document.addEventListener("keydown", this._typeKeyHandlerWrapper);
 
         if (this._currentTimeMs !== "passage") {
             const frameRateMs = 13;
@@ -98,6 +109,10 @@ export class TypingSession {
 
         this._state = TYPING_SESSION_STATE_FINISHED;
 
+        if (this._typeKeyHandlerWrapper != null) {
+            document.removeEventListener("keydown", this._typeKeyHandlerWrapper);
+        }
+
         if (this._intervalId != null) {
             clearInterval(this._intervalId);
             this._intervalId = null;
@@ -108,7 +123,59 @@ export class TypingSession {
         this._currentTimeMs = Math.max(0, this._currentTimeMs - deltaMs);
         this.updateTimeEl();
         if (this._currentTimeMs === 0) {
-            stop();
+            this.stop();
         }
+    }
+
+    _highlightCurrentLetter() {
+        const letterSpan = this._textToTypeEl.children[this._currentTextIndex];
+        letterSpan.classList.add("highlight-current-letter");
+    }
+
+    _unhighlightCurrentLetter() {
+        this._textToTypeEl.children[this._currentTextIndex]
+            .classList.remove("highlight-current-letter");
+    }
+
+    _typeKeyHandler(key) {
+        if (["Alt", "Shift", "Tab", "CapsLock", "Control"].includes(key)) {
+            return;
+        }
+
+        const currentLetter = this._textToTypeEl.children[this._currentTextIndex];
+        if (key === "Backspace") {
+            if (this._currentTextIndex === 0) {
+                return;
+            }
+
+            this._unhighlightCurrentLetter();
+            this._currentTextIndex--;
+            this._textToTypeEl.children[this._currentTextIndex].className = "";
+            this._highlightCurrentLetter();
+            return;
+        }
+
+        const isCorrect = currentLetter.textContent === key;
+        if (isCorrect) {
+            currentLetter.classList.add("highlight-correct-letter");
+            currentLetter.classList.remove("highlight-wrong-letter");
+        }
+        else {
+            currentLetter.classList.remove("highlight-correct-letter");
+            currentLetter.classList.add("highlight-wrong-letter");
+        }
+        
+        if (this._currentTextIndex === this._typedCount){
+            this._typedCount++;
+            this._typedCorrectlyCount += isCorrect;
+        }
+
+        this._unhighlightCurrentLetter();
+        this._currentTextIndex++;
+        if (this._currentTextIndex >= this._text.length){
+            this.stop();
+            return;
+        }
+        this._highlightCurrentLetter();
     }
 }

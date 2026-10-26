@@ -26,7 +26,6 @@ function init(){
 function setDifficulty(){
     const text = getRandomTextByDifficulty(data, difficultyEl.value);
     typingSession.setText(text);
-    typingSession.updateTextToTypeEl();
 }
 
 function setTime(){
