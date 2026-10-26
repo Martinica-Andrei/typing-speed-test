@@ -200,6 +200,9 @@ header {
     border: 0;
     color: var(--neutral-0);
     width: 100%;
+    font-size: 2rem;
+    resize:none;
+    height: 100%;
 }
 
 
