@@ -16,7 +16,8 @@ difficultyEl.addEventListener("input", setDifficulty);
 startSectionEl.addEventListener("click", start);
 
 $("#restart-test-btn").addEventListener("click", e => {
-    typingSession.restart();
+    const text = getRandomTextByDifficulty(data, difficultyEl.value);
+    typingSession.restart(text);
     difficultyEl.disabled = false;
     modeEl.disabled = false;
     startSectionEl.style.display = "";

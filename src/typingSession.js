@@ -129,7 +129,7 @@ export class TypingSession {
         }, frameRateMs)
     }
 
-    restart() {
+    restart(text) {
         if (this._state !== TYPING_SESSION_STATE_RUNNING) {
             return;
         }
@@ -138,7 +138,7 @@ export class TypingSession {
 
         this._state = TYPING_SESSION_STATE_MENU;
         this._currentTimeMs = this._startTimeMs;
-        this.setText(this._text);
+        this.setText(text);
 
         this.updateTimeEl();
     }
