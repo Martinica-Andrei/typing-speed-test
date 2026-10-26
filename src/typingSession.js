@@ -51,9 +51,6 @@ export class TypingSession{
         if (this._currentTimeSeconds === "passage"){
            this._timeEl.textContent = "-"; 
         }
-        else if(this._currentTimeSeconds === 60){
-            this._timeEl.textContent = "00:60";
-        }
         else{
             let seconds = this._currentTimeSeconds % 60;
             seconds = seconds > 9 ? seconds : `0${seconds}`;
