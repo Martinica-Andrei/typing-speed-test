@@ -14,6 +14,7 @@ export class TypingSession {
         this._accuracyEl = $("#accuracy-value");
         this._timeEl = $("#time-value");
         this._textToTypeEl = $("#text-to-type");
+        this._textToTypeWithInput = $("#text-to-type-with-input");
         this._intervalId = null;
         this._state = TYPING_SESSION_STATE_MENU;
         this._currentTextIndex = 0;
@@ -106,7 +107,7 @@ export class TypingSession {
         }
         this._state = TYPING_SESSION_STATE_RUNNING;
 
-        this._textToTypeEl.scrollTop = 0;
+        this._textToTypeWithInput.scrollTop = 0;
         this._currentTimeMs = this._startTimeMs;
 
         this._highlightCurrentLetter();
@@ -238,7 +239,7 @@ export class TypingSession {
         const currentLetter = this._textToTypeEl.children[this._currentTextIndex];
         const rows = (currentLetter.offsetTop - this._lettersOffsetTopMin) / currentLetter.offsetHeight;
         if (rows >= minRowsToScroll){
-            $("#text-to-type-with-input").scrollTop = (rows - minRowsToScroll + 1) * currentLetter.offsetHeight;
+            this._textToTypeWithInput.scrollTop = (rows - minRowsToScroll + 1) * currentLetter.offsetHeight;
         }
     }
 }
