@@ -130,6 +130,8 @@ header {
     display: flex;
     margin-top: 8px;
     gap: 8px;
+    border-bottom: 1px solid var(--neutral-500);
+    padding-bottom: 16px;
 }
 
 .option {
@@ -192,36 +194,61 @@ header {
 /* text-to-type
 ----------------------------------------------------------------------------------- */
 
-.text-to-type {
+.text-to-type-section {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    height: 100%;
     position: absolute;
     top: 0;
-    overflow-y: hidden;
-    border: 0;
-    font-size: 2rem;
     height: 100%;
-    padding-top: 32px;
-    color: var(--neutral-400);
+    padding-top: 16px;
 }
 
-.text-to-type span{
+.text-to-type {
+    font-size: 1.5rem;
+    color: var(--neutral-400);
+    overflow-y: hidden;
+}
+
+.text-to-type span {
     white-space: pre-wrap;
 }
 
-.highlight-current-letter{
+.highlight-current-letter {
     background-color: var(--neutral-500);
     border-radius: 4px;
 }
 
-.highlight-correct-letter{
+.highlight-correct-letter {
     color: var(--green-500)
 }
 
-.highlight-wrong-letter{
+.highlight-wrong-letter {
     color: var(--red-500);
     text-decoration: underline;
     text-decoration-thickness: 3px;
 }
 
+.text-to-type-restart-section {
+    border-top: 1px solid var(--neutral-500);
+    padding-top: 16px;
+    display: flex;
+    justify-content: center;
+}
+
+.text-to-type-restart-section button {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 0;
+    font-size: 1rem;
+    color: var(--neutral-0);
+    background-color: var(--neutral-800);
+}
+
+.text-to-type-restart-section button:hover{
+    background-color: var(--neutral-500);
+}
 
 /* test-complete-section
 ----------------------------------------------------------------------------------- */
