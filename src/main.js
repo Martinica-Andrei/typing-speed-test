@@ -23,6 +23,10 @@ $("#restart-test-btn").addEventListener("click", e => {
     textToTypeRestartSectionEl.style.display = "";
 });
 
+$("#text-to-type-input").addEventListener("input", e => {
+    e.target.value = "";
+});
+
 init();
 
 function init() {
