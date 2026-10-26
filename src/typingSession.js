@@ -239,7 +239,6 @@ export class TypingSession {
         const minRowsToScroll = 2;
         const currentLetter = this._textToTypeEl.children[this._currentTextIndex];
         const rows = (currentLetter.offsetTop - this._lettersOffsetTopMin) / currentLetter.offsetHeight;
-        console.log(rows);
         if (rows >= minRowsToScroll || 
             (this._textToTypeWithInput.scrollTop / currentLetter.offsetHeight) >= rows) {
             this._textToTypeWithInput.scrollTop = (rows - minRowsToScroll + 1) * currentLetter.offsetHeight;
