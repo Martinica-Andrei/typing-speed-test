@@ -6,16 +6,22 @@ export class TypingSession{
         this._wpmEl = null;
         this._accuracyEl = null;
         this._timeEl = null;
+        this._textToTypeEl = null;
     }
 
     getAccuracy(){
         return 100;
     }
 
-    setElements(wpmEl, accuracyEl, timeEl){
+    setElements(
+        wpmEl, 
+        accuracyEl, 
+        timeEl,
+        textToTypeEl){
         this._wpmEl = wpmEl;
         this._accuracyEl = accuracyEl;
         this._timeEl = timeEl;
+        this._textToTypeEl = textToTypeEl;
     }
 
     setCurrentTimeSeconds(value){
@@ -30,6 +36,7 @@ export class TypingSession{
         this.updateWpmEl();
         this.updateAccuracyEl();
         this.updateTimeEl();
+        this.updateTextToTypeEl();
     }
 
     updateWpmEl(){
@@ -56,5 +63,9 @@ export class TypingSession{
 
             this._timeEl.textContent = `${minutes}:${seconds}`;
         }
+    }
+
+    updateTextToTypeEl(){
+        this._textToTypeEl.value = this._text;
     }
 }

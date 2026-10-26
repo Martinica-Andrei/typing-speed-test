@@ -11,3 +11,9 @@ export async function loadData() {
 
     return null;
 }
+
+export function getRandomTextByDifficulty(data, difficulty){
+    const texts = data[difficulty];
+    const randomIndex = Math.floor(Math.random() * texts.length);
+    return texts[randomIndex].text;
+}
