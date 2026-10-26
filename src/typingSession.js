@@ -6,8 +6,8 @@ import {
 import { $ } from "./querySelector.js";
 export class TypingSession {
     constructor() {
-        this._wpm = 0;
         this._currentTimeMs = 0;
+        this._passedTimeMs = 0;
         this._text = "";
         this._wpmEl = $("#wpm-value");
         this._accuracyEl = $("#accuracy-value");
@@ -22,7 +22,24 @@ export class TypingSession {
     }
 
     getAccuracy() {
-        return 100;
+        if (this._typedCount === 0) {
+            return 100;
+        }
+
+        return Math.floor((this._typedCorrectlyCount / this._typedCount) * 100);
+    }
+
+    getErrorCount() {
+        return this._typedCount - this._typedCorrectlyCount;
+    }
+
+    getWpm() {
+        const minutes = this._passedTimeMs / 1000 / 60;
+        console.log(minutes);
+        if (minutes === 0) {
+            return 0;
+        }
+        return Math.floor(this._typedCorrectlyCount / 5 / minutes);
     }
 
     setCurrentTimeMs(value) {
@@ -50,7 +67,7 @@ export class TypingSession {
     }
 
     updateWpmEl() {
-        this._wpmEl.textContent = this._wpm;
+        this._wpmEl.textContent = this.getWpm();
     }
 
     updateAccuracyEl() {
@@ -87,19 +104,21 @@ export class TypingSession {
 
         this._highlightCurrentLetter();
 
-        this._typeKeyHandlerWrapper = e => this._typeKeyHandler(e.key);
+        this._typeKeyHandlerWrapper = e => this._typeKeyHandler(e);
         document.addEventListener("keydown", this._typeKeyHandlerWrapper);
 
-        if (this._currentTimeMs !== "passage") {
-            const frameRateMs = 13;
-            let prevTimeMs = Date.now();
-            this._intervalId = setInterval(() => {
-                const timeNowMs = Date.now();
-                const deltaMs = timeNowMs - prevTimeMs;
-                prevTimeMs = timeNowMs;
-                this._loop(deltaMs)
-            }, frameRateMs)
-        }
+        const frameRateMs = 13;
+        let prevTimeMs = Date.now();
+        this._intervalId = setInterval(() => {
+            const timeNowMs = Date.now();
+            const deltaMs = timeNowMs - prevTimeMs;
+            prevTimeMs = timeNowMs;
+            if (this._currentTimeMs !== "passage") {
+                this._updateCurrentTimeMs(deltaMs);
+            }
+
+            this._passedTimeMs += deltaMs;
+        }, frameRateMs)
     }
 
     stop() {
@@ -119,7 +138,7 @@ export class TypingSession {
         }
     }
 
-    _loop(deltaMs) {
+    _updateCurrentTimeMs(deltaMs) {
         this._currentTimeMs = Math.max(0, this._currentTimeMs - deltaMs);
         this.updateTimeEl();
         if (this._currentTimeMs === 0) {
@@ -137,9 +156,13 @@ export class TypingSession {
             .classList.remove("highlight-current-letter");
     }
 
-    _typeKeyHandler(key) {
+    _typeKeyHandler(e) {
+        const key = e.key;
         if (["Alt", "Shift", "Tab", "CapsLock", "Control"].includes(key)) {
             return;
+        }
+        if (key === '\''){
+            e.preventDefault();
         }
 
         const currentLetter = this._textToTypeEl.children[this._currentTextIndex];
@@ -164,15 +187,19 @@ export class TypingSession {
             currentLetter.classList.remove("highlight-correct-letter");
             currentLetter.classList.add("highlight-wrong-letter");
         }
-        
-        if (this._currentTextIndex === this._typedCount){
+
+        if (this._currentTextIndex === this._typedCount) {
             this._typedCount++;
             this._typedCorrectlyCount += isCorrect;
+            if (this._currentTextIndex % 15 === 0) {
+                this.updateWpmEl();
+                this.updateAccuracyEl();
+            }
         }
 
         this._unhighlightCurrentLetter();
         this._currentTextIndex++;
-        if (this._currentTextIndex >= this._text.length){
+        if (this._currentTextIndex >= this._text.length) {
             this.stop();
             return;
         }
