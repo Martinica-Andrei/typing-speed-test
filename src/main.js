@@ -1,7 +1,7 @@
 import { loadData, getRandomTextByDifficulty } from "./dataRepository.js";
 import { TypingSession } from "./typingSession.js";
 import { $ } from "./querySelector.js";
-import { displayMainPage, displayTestCompletePage } from "./pages.js";
+import { displayMainPage, displayTestCompletePage, TEST_COMPLETE_DEFAULT, TEST_COMPLETE_FIRST_TEST, TEST_COMPLETE_NEW_PERSONAL_BEST } from "./pages.js";
 
 const modeEl = $("#mode");
 const difficultyEl = $("#difficulty");
@@ -18,8 +18,16 @@ difficultyEl.addEventListener("input", setDifficulty);
 startSectionEl.addEventListener("click", start);
 
 init();
-displayMainPage();
-//displayTestCompletePage();
+//displayMainPage();
+displayTestCompletePage({
+    wpm:50,
+    accuracy: 93,
+    correctCount: 80,
+    wrongCount: 50,
+    //pageType: TEST_COMPLETE_DEFAULT
+    //pageType: TEST_COMPLETE_FIRST_TEST
+    pageType: TEST_COMPLETE_NEW_PERSONAL_BEST
+});
 
 function restart() {
     const text = getRandomTextByDifficulty(data, difficultyEl.value);

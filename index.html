@@ -79,22 +79,29 @@
 
 
   <section class="test-complete-section" aria-labelledby="test-complete" id="test-complete-section">
-    <h2 id="test-complete" class="title">Test Complete!</h2>
-    <p class="description">Solid run. Keep pushing to beat your high score.</p>
+    <div>
+      <img src="assets/images/icon-completed.svg" alt="" id="icon-completed" class="test-complete-icon">
+      <img src="assets/images/icon-new-pb.svg" alt="" id="icon-new-personal-best" class="test-complete-icon">
+      <img src="assets/images/pattern-star-2.svg" alt="" id="star-top">
+    </div>
+    <h2 class="title" id="test-complete-title"></h2>
+    <p class="description" id="test-complete-description"></p>
 
     <div class="test-complete-results">
       <div class="test-complete-result">
         <p>WPM:</p>
-        <p id="test-complete-wpm-value" class="value">50</p>
+        <p id="test-complete-wpm-value" class="value"></p>
       </div>
       <div class="test-complete-result">
         <p>Accuracy:</p>
-        <p id="test-complete-accuracy-value" class="value">93%</p>
+        <p id="test-complete-accuracy-value" class="value"></p>
       </div>
       <div class="test-complete-result">
         <p>Characters:</p>
-        <p class="value"><span id="test-complete-characters-correct">5</span>/<span
-            id="test-complete-characters-wrong">2</span></p>
+        <p class="value">
+          <span id="test-complete-characters-correct"></span>/
+          <span id="test-complete-characters-wrong"></span>
+        </p>
       </div>
     </div>
 
