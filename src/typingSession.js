@@ -1,6 +1,12 @@
 import { $ } from "./querySelector.js";
 import { COLOR_YELLOW, COLOR_RED } from "./colors.js";
 import { getAccuracyColor } from "./accuracyUtils.js";
+import {
+    displayTestCompletePage,
+    TEST_COMPLETE_DEFAULT,
+    TEST_COMPLETE_FIRST_TEST,
+    TEST_COMPLETE_NEW_PERSONAL_BEST
+} from "./pages.js";
 
 export class TypingSession {
     constructor() {
@@ -88,7 +94,7 @@ export class TypingSession {
         this._timeEl.textContent = `${minutes}:${seconds}`;
 
         if (this._currentTimeMs === this._startTimeMs) {
-            this._timeEl.color = "";
+            this._timeEl.style.color = "";
         }
         else {
             this._timeEl.style.color = (this._currentTimeMs >= this._startTimeMs * 0.25) ? COLOR_YELLOW : COLOR_RED;
@@ -152,6 +158,7 @@ export class TypingSession {
         this._currentTimeMs = Math.max(0, this._currentTimeMs - deltaMs);
         this.updateTimeEl();
         if (this._currentTimeMs === 0) {
+            this._displayTestCompletePage();
             this.stop();
         }
     }
@@ -203,9 +210,11 @@ export class TypingSession {
         this._unhighlightCurrentLetter();
         this._currentTextIndex++;
         if (this._currentTextIndex >= this._text.length) {
+            this._displayTestCompletePage();
             this.stop();
             return;
         }
+
         this._highlightCurrentLetter();
 
         this._processScroll();
@@ -243,5 +252,17 @@ export class TypingSession {
 
         this._textToTypeInputEl.removeEventListener("input", this._typeKeyHandlerWrapper);
         this._textToTypeInputEl.value = "";
+    }
+
+    _displayTestCompletePage() {
+        displayTestCompletePage({
+            wpm: this.getWpm(),
+            accuracy: this.getAccuracy(),
+            correctCount: this._typedCorrectlyCount,
+            wrongCount: this.getErrorCount(),
+            pageType: TEST_COMPLETE_DEFAULT
+            //pageType: TEST_COMPLETE_FIRST_TEST
+            //pageType: TEST_COMPLETE_NEW_PERSONAL_BEST
+        });
     }
 }

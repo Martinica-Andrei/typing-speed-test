@@ -10,7 +10,6 @@ const textToTypeRestartSectionEl = $("#text-to-type-restart-section");
 
 
 const data = await loadData();
-
 const typingSession = new TypingSession();
 
 modeEl.addEventListener("input", setTime);
@@ -18,16 +17,7 @@ difficultyEl.addEventListener("input", setDifficulty);
 startSectionEl.addEventListener("click", start);
 
 init();
-//displayMainPage();
-displayTestCompletePage({
-    wpm:50,
-    accuracy: 93,
-    correctCount: 80,
-    wrongCount: 50,
-    //pageType: TEST_COMPLETE_DEFAULT
-    //pageType: TEST_COMPLETE_FIRST_TEST
-    pageType: TEST_COMPLETE_NEW_PERSONAL_BEST
-});
+displayMainPage();
 
 function restart() {
     const text = getRandomTextByDifficulty(data, difficultyEl.value);
