@@ -24,8 +24,15 @@ $("#restart-test-btn").addEventListener("click", e => {
     textToTypeRestartSectionEl.style.display = "";
 });
 
-$("#text-to-type-input").addEventListener("input", e => {
-    e.target.value = "";
+$("#text-to-type-input").addEventListener("beforeinput", (e) => {
+    const input = e.target;
+    const start = input.selectionStart;
+    const end = input.selectionEnd;
+    const length = input.value.length;
+
+    if (start !== length || end !== length) {
+        input.setSelectionRange(length, length);
+    }
 });
 
 init();

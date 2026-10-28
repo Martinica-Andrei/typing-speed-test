@@ -15,6 +15,7 @@ export class TypingSession {
         this._timeEl = $("#time-value");
         this._textToTypeEl = $("#text-to-type");
         this._textToTypeWithInput = $("#text-to-type-with-input");
+        this._textToTypeInput = $("#text-to-type-input");
         this._intervalId = null;
         this._state = TYPING_SESSION_STATE_MENU;
         this._currentTextIndex = 0;
@@ -109,11 +110,11 @@ export class TypingSession {
 
         this._textToTypeWithInput.scrollTop = 0;
         this._currentTimeMs = this._startTimeMs;
+        this._textToTypeInput.value = "";
 
         this._highlightCurrentLetter();
 
-        this._typeKeyHandlerWrapper = e => this._typeKeyHandler(e);
-        document.addEventListener("keydown", this._typeKeyHandlerWrapper);
+        this._addKeyEvent();
 
         const frameRateMs = 13;
         let prevTimeMs = Date.now();
@@ -150,9 +151,7 @@ export class TypingSession {
 
         this._state = TYPING_SESSION_STATE_FINISHED;
 
-        if (this._typeKeyHandlerWrapper != null) {
-            document.removeEventListener("keydown", this._typeKeyHandlerWrapper);
-        }
+        this._removeKeyEvent();
 
         this._clearInterval();
     }
@@ -182,15 +181,7 @@ export class TypingSession {
             .classList.remove("highlight-current-letter");
     }
 
-    _typeKeyHandler(e) {
-        const key = e.key;
-        if (["Alt", "Shift", "Tab", "CapsLock", "Control"].includes(key)) {
-            return;
-        }
-        if (key === '\'') {
-            e.preventDefault();
-        }
-
+    _typeKeyHandler(key) {
         const currentLetter = this._textToTypeEl.children[this._currentTextIndex];
         if (key === "Backspace") {
             if (this._currentTextIndex === 0) {
@@ -239,9 +230,35 @@ export class TypingSession {
         const minRowsToScroll = 2;
         const currentLetter = this._textToTypeEl.children[this._currentTextIndex];
         const rows = (currentLetter.offsetTop - this._lettersOffsetTopMin) / currentLetter.offsetHeight;
-        if (rows >= minRowsToScroll || 
+        if (rows >= minRowsToScroll ||
             (this._textToTypeWithInput.scrollTop / currentLetter.offsetHeight) >= rows) {
             this._textToTypeWithInput.scrollTop = (rows - minRowsToScroll + 1) * currentLetter.offsetHeight;
         }
+    }
+
+    _addKeyEvent() {
+        let previousInputValue = this._textToTypeInput.value;
+        this._typeKeyHandlerWrapper = e => {
+            const newInputValue = e.target.value;
+            if (newInputValue.length > previousInputValue.length) {
+                this._typeKeyHandler(newInputValue[newInputValue.length - 1]);
+            }
+            else if (newInputValue.length < previousInputValue.length) {
+                this._typeKeyHandler("Backspace");
+            }
+
+            previousInputValue = newInputValue;
+        }
+
+        this._textToTypeInput.addEventListener("input", this._typeKeyHandlerWrapper);
+    }
+
+    _removeKeyEvent() {
+        if (this._typeKeyHandlerWrapper == null) {
+            return;
+        }
+
+        this._textToTypeInput.removeEventListener("input", this._typeKeyHandlerWrapper);
+        this._textToTypeInput.value = "";
     }
 }
