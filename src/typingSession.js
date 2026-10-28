@@ -255,6 +255,10 @@ export class TypingSession {
     }
 
     _displayTestCompletePage() {
+        if (this._typedCount < this._text.length){
+            this._typedCount = this._text.length;
+        }
+
         displayTestCompletePage({
             wpm: this.getWpm(),
             accuracy: this.getAccuracy(),
