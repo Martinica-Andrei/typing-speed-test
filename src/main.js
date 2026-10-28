@@ -1,11 +1,13 @@
 import { loadData, getRandomTextByDifficulty } from "./dataRepository.js";
 import { TypingSession } from "./typingSession.js";
 import { $ } from "./querySelector.js";
+import { displayMainPage, displayTestCompletePage } from "./pages.js";
 
 const modeEl = $("#mode");
 const difficultyEl = $("#difficulty");
 const startSectionEl = $("#start-section");
 const textToTypeRestartSectionEl = $("#text-to-type-restart-section");
+
 
 const data = await loadData();
 
@@ -15,13 +17,23 @@ modeEl.addEventListener("input", setTime);
 difficultyEl.addEventListener("input", setDifficulty);
 startSectionEl.addEventListener("click", start);
 
-$("#restart-test-btn").addEventListener("click", e => {
+init();
+displayMainPage();
+//displayTestCompletePage();
+
+function restart() {
     const text = getRandomTextByDifficulty(data, difficultyEl.value);
-    typingSession.restart(text);
     difficultyEl.disabled = false;
     modeEl.disabled = false;
     startSectionEl.style.display = "";
     textToTypeRestartSectionEl.style.display = "";
+    typingSession.restart(text);
+}
+
+$("#restart-test-btn").addEventListener("click", restart);
+$("#go-again-btn").addEventListener("click", () => {
+    restart();
+    displayMainPage();
 });
 
 $("#text-to-type-input").addEventListener("beforeinput", (e) => {
@@ -34,8 +46,6 @@ $("#text-to-type-input").addEventListener("beforeinput", (e) => {
         input.setSelectionRange(length, length);
     }
 });
-
-init();
 
 function init() {
     setDifficulty();

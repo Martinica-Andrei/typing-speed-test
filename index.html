@@ -20,7 +20,7 @@
 </head>
 
 <body>
-  <div class="content">
+  <div class="content" id="content">
     <div>
       <header aria-labelledby="title">
         <h1 id="title" class="sr-only">Typing Speed Test</h1>
@@ -31,13 +31,13 @@
         </div>
       </header>
 
-      <section class="statistics" aria-label="Statistics">
+      <section class="statistics" aria-label="Statistics" id="statistics">
         <p>WPM: <span id="wpm-value"></span></p>
         <p>Accuracy: <span id="accuracy-value"></span></p>
         <p>Time: <span id="time-value"></span></p>
       </section>
 
-      <section class="options" aria-label="Options">
+      <section class="options" aria-label="Options" id="options">
         <div class="option">
           <label for="difficulty" class="sr-only">Difficulty:</label>
           <select id="difficulty">
@@ -59,7 +59,7 @@
       </section>
     </div>
 
-    <div class="content-bottom">
+    <div class="content-bottom" id="content-bottom">
       <section id="start-section" class="start-section" aria-labelledby="start-btn">
         <button class="start-btn" type="button" id="start-btn">Start Typing Test</button>
         <p>Or click the text and start typing</p>
@@ -78,24 +78,29 @@
   </div>
 
 
-  <section class="test-complete-section" aria-labelledby="test-complete">
-    <h2 id="test-complete">Test Complete!</h2>
-    <p>Solid run. Keep pushing to beat your high score.</p>
+  <section class="test-complete-section" aria-labelledby="test-complete" id="test-complete-section">
+    <h2 id="test-complete" class="title">Test Complete!</h2>
+    <p class="description">Solid run. Keep pushing to beat your high score.</p>
+
+    <div class="test-complete-results">
+      <div class="test-complete-result">
+        <p>WPM:</p>
+        <p id="test-complete-wpm-value" class="value">50</p>
+      </div>
+      <div class="test-complete-result">
+        <p>Accuracy:</p>
+        <p id="test-complete-accuracy-value" class="value">93%</p>
+      </div>
+      <div class="test-complete-result">
+        <p>Characters:</p>
+        <p class="value"><span id="test-complete-characters-correct">5</span>/<span
+            id="test-complete-characters-wrong">2</span></p>
+      </div>
+    </div>
 
     <div>
-      <p>WPM:</p>
-      <p></p>
+      <button type="button" id="go-again-btn" class="go-again-btn">Go Again ⟲</button>
     </div>
-    <div>
-      <p>Accuracy:</p>
-      <p></p>
-    </div>
-    <div>
-      <p>Characters:</p>
-      <p></p>
-    </div>
-
-    <button type="button" id="go-again-btn">Go Again</button>
   </section>
 
 </body>
