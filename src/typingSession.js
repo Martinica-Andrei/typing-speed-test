@@ -111,6 +111,7 @@ export class TypingSession {
         this._textToTypeWithInput.scrollTop = 0;
         this._currentTimeMs = this._startTimeMs;
         this._textToTypeInput.value = "";
+        this._textToTypeInput.focus();
 
         this._highlightCurrentLetter();
 
