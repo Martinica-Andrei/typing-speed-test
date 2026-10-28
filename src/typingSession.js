@@ -108,7 +108,7 @@ export class TypingSession {
         }
         this._state = TYPING_SESSION_STATE_RUNNING;
 
-        this._textToTypeWithInput.scrollTop = 0;
+        this._textToTypeEl.scrollTop = 0;
         this._currentTimeMs = this._startTimeMs;
         this._textToTypeInput.value = "";
         this._textToTypeInput.focus();
@@ -232,7 +232,7 @@ export class TypingSession {
         const currentLetter = this._textToTypeEl.children[this._currentTextIndex];
         const rows = (currentLetter.offsetTop - this._lettersOffsetTopMin) / currentLetter.offsetHeight;
         const newScrollTop = (rows - minRowsToScroll + 1) * currentLetter.offsetHeight;
-        this._textToTypeWithInput.scrollTop = Math.max(newScrollTop, 0);
+        this._textToTypeEl.scrollTop = Math.max(newScrollTop, 0);
     }
 
     _addKeyEvent() {

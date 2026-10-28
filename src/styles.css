@@ -205,8 +205,7 @@ header {
 }
 
 .text-to-type-with-input {
-    overflow-y: hidden;
-    height: 100%;
+    min-height: 150px;
     position: relative;
 }
 
@@ -214,6 +213,7 @@ header {
     font-size: 1.5rem;
     color: var(--neutral-400);
     height: 100%;
+    overflow-y: hidden;
 }
 
 .text-to-type span {
