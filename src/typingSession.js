@@ -4,6 +4,9 @@ import {
     TYPING_SESSION_STATE_FINISHED
 } from "./typingSessionState.js";
 import { $ } from "./querySelector.js";
+import { COLOR_YELLOW } from "./colors.js";
+import { getAccuracyColor } from "./accuracyUtils.js";
+
 export class TypingSession {
     constructor() {
         this._currentTimeMs = 0;
@@ -75,7 +78,10 @@ export class TypingSession {
     }
 
     updateAccuracyEl() {
-        this._accuracyEl.textContent = this.getAccuracy() + "%";
+        const accuracy = this.getAccuracy();
+        this._accuracyEl.textContent = accuracy + "%";
+
+        this._accuracyEl.style.color = this._typedCount !== 0 ? getAccuracyColor(accuracy) : "";
     }
 
     updateTimeEl() {
@@ -92,6 +98,8 @@ export class TypingSession {
 
             this._timeEl.textContent = `${minutes}:${seconds}`;
         }
+        
+        this._timeEl.style.color = this._currentTimeMs !== this._startTimeMs ? COLOR_YELLOW : "";
     }
 
     _initTextToTypeElContent() {

@@ -1,5 +1,11 @@
-import { COLOR_RED, COLOR_GREEN } from "./colors.js";
+import { COLOR_RED, COLOR_GREEN, COLOR_YELLOW } from "./colors.js";
 
 export function getAccuracyColor(accuracy) {
-    return accuracy >= 100 ? COLOR_GREEN : COLOR_RED;
+    if (accuracy >= 100){
+        return COLOR_GREEN;
+    }
+    else if (accuracy >= 97){
+        return COLOR_YELLOW;
+    }
+    return COLOR_RED;
 }
