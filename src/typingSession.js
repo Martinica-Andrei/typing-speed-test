@@ -1,8 +1,3 @@
-import {
-    TYPING_SESSION_STATE_MENU,
-    TYPING_SESSION_STATE_RUNNING,
-    TYPING_SESSION_STATE_FINISHED
-} from "./typingSessionState.js";
 import { $ } from "./querySelector.js";
 import { COLOR_YELLOW, COLOR_RED } from "./colors.js";
 import { getAccuracyColor } from "./accuracyUtils.js";
@@ -20,7 +15,6 @@ export class TypingSession {
         this._textToTypeWithInputEl = $("#text-to-type-with-input");
         this._textToTypeInputEl = $("#text-to-type-input");
         this._intervalId = null;
-        this._state = TYPING_SESSION_STATE_MENU;
         this._currentTextIndex = 0;
         this._typeKeyHandlerWrapper = null;
         this._typedCorrectlyCount = 0;
@@ -48,17 +42,11 @@ export class TypingSession {
     }
 
     setStartTimeMs(value) {
-        if (this._state !== TYPING_SESSION_STATE_MENU) {
-            return;
-        }
         this._currentTimeMs = value;
         this._startTimeMs = this._currentTimeMs;
     }
 
     setText(value) {
-        if (this._state !== TYPING_SESSION_STATE_MENU) {
-            return;
-        }
         this._text = value;
         this._currentTextIndex = 0;
         this._typedCorrectlyCount = 0;
@@ -116,11 +104,6 @@ export class TypingSession {
 
 
     start() {
-        if (this._state !== TYPING_SESSION_STATE_MENU) {
-            return;
-        }
-        this._state = TYPING_SESSION_STATE_RUNNING;
-
         this._textToTypeEl.scrollTop = 0;
         this._currentTimeMs = this._startTimeMs;
         this._textToTypeInputEl.value = "";
@@ -145,13 +128,8 @@ export class TypingSession {
     }
 
     restart(text) {
-        if (this._state !== TYPING_SESSION_STATE_RUNNING) {
-            return;
-        }
-
         this.stop();
 
-        this._state = TYPING_SESSION_STATE_MENU;
         this._currentTimeMs = this._startTimeMs;
         this.setText(text);
 
@@ -159,14 +137,7 @@ export class TypingSession {
     }
 
     stop() {
-        if (this._state !== TYPING_SESSION_STATE_RUNNING) {
-            return;
-        }
-
-        this._state = TYPING_SESSION_STATE_FINISHED;
-
         this._removeKeyEvent();
-
         this._clearInterval();
     }
 
