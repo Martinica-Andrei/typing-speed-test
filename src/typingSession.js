@@ -4,7 +4,7 @@ import {
     TYPING_SESSION_STATE_FINISHED
 } from "./typingSessionState.js";
 import { $ } from "./querySelector.js";
-import { COLOR_YELLOW } from "./colors.js";
+import { COLOR_YELLOW, COLOR_RED } from "./colors.js";
 import { getAccuracyColor } from "./accuracyUtils.js";
 
 export class TypingSession {
@@ -87,19 +87,24 @@ export class TypingSession {
     updateTimeEl() {
         if (this._currentTimeMs === "passage") {
             this._timeEl.textContent = "-";
+            return;
+        }
+
+        const currentTimeSeconds = Math.ceil(this._currentTimeMs / 1000);
+        let seconds = currentTimeSeconds % 60;
+        seconds = seconds > 9 ? seconds : `0${seconds}`;
+
+        let minutes = Math.floor(currentTimeSeconds / 60);
+        minutes = minutes > 9 ? minutes : `0${minutes}`;
+
+        this._timeEl.textContent = `${minutes}:${seconds}`;
+
+        if (this._currentTimeMs === this._startTimeMs) {
+            this._timeEl.color = "";
         }
         else {
-            const currentTimeSeconds = Math.ceil(this._currentTimeMs / 1000);
-            let seconds = currentTimeSeconds % 60;
-            seconds = seconds > 9 ? seconds : `0${seconds}`;
-
-            let minutes = Math.floor(currentTimeSeconds / 60);
-            minutes = minutes > 9 ? minutes : `0${minutes}`;
-
-            this._timeEl.textContent = `${minutes}:${seconds}`;
+            this._timeEl.style.color = (this._currentTimeMs >= this._startTimeMs * 0.25) ? COLOR_YELLOW : COLOR_RED;
         }
-        
-        this._timeEl.style.color = this._currentTimeMs !== this._startTimeMs ? COLOR_YELLOW : "";
     }
 
     _initTextToTypeElContent() {
