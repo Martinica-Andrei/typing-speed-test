@@ -475,6 +475,11 @@ div:has(#confetti) {
         position:absolute;
         left:0;
         right:0;
-        bottom:0;
+    }
+}
+
+@media screen and (min-width:800px) and (min-height:725px){
+    div:has(#confetti){
+        bottom: 0;
     }
 }
