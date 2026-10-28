@@ -21,7 +21,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![](./screenshot.png)
 ### Links
 
 - [Live Site URL](https://martinica-andrei.github.io/typing-speed-test/)
