@@ -372,3 +372,15 @@ div:has(#confetti){
     min-width: calc(100% + var(--body-padding));
     left: calc(0px - var(--body-padding));
 }
+
+#test-complete-wpm-value{
+    color: var(--neutral-0);
+}
+
+#test-complete-characters-correct{
+    color:var(--green-500);
+}
+
+#test-complete-characters-wrong{
+    color:var(--red-500);
+}

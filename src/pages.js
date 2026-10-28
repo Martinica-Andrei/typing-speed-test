@@ -4,6 +4,9 @@ export const TEST_COMPLETE_DEFAULT = 0;
 export const TEST_COMPLETE_FIRST_TEST = 1;
 export const TEST_COMPLETE_NEW_PERSONAL_BEST = 2;
 
+const COLOR_RED = window.getComputedStyle(document.body).getPropertyValue('--red-500');
+const COLOR_GREEN = window.getComputedStyle(document.body).getPropertyValue('--green-500');
+
 const statisticsEl = $("#statistics");
 const optionsEl = $("#options");
 const contentEl = $("#content");
@@ -25,6 +28,7 @@ const iconCompletedEl = $("#icon-completed");
 const iconNewPersonalBestEl = $("#icon-new-personal-best");
 const starTopEl = $("#star-top");
 
+
 export function displayMainPage() {
     statisticsEl.style.display = "";
     optionsEl.style.display = "";
@@ -42,6 +46,7 @@ export function displayTestCompletePage({ wpm, accuracy, correctCount, wrongCoun
 
     testCompleteWpmValueEl.textContent = wpm;
     testCompleteAccuracyValueEl.textContent = accuracy + "%";
+    testCompleteAccuracyValueEl.style.color = accuracy === 100 ? COLOR_GREEN : COLOR_RED;
     testCompleteCharactersCorrectEl.textContent = correctCount;
     testCompleteCharactersWrongEl.textContent = wrongCount;
 
