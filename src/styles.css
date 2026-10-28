@@ -205,7 +205,7 @@ header {
 }
 
 .text-to-type-with-input {
-    min-height: 150px;
+    min-height: 0px;
     position: relative;
 }
 
