@@ -2,6 +2,7 @@ import { loadData, getRandomTextByDifficulty } from "./dataRepository.js";
 import { TypingSession } from "./typingSession.js";
 import { $ } from "./querySelector.js";
 import { displayMainPage, displayTestCompletePage, TEST_COMPLETE_DEFAULT, TEST_COMPLETE_FIRST_TEST, TEST_COMPLETE_NEW_PERSONAL_BEST } from "./pages.js";
+import { bestScoreRepository } from "./bestScoreRepository.js";
 
 const modeEl = $("#mode");
 const difficultyEl = $("#difficulty");
@@ -48,6 +49,7 @@ $("#text-to-type-input").addEventListener("beforeinput", (e) => {
 function init() {
     setDifficulty();
     setTime();
+    bestScoreRepository.updatePersonalBestEl();
     typingSession.updateElements();
 }
 

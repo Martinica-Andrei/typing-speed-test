@@ -7,6 +7,7 @@ import {
     TEST_COMPLETE_FIRST_TEST,
     TEST_COMPLETE_NEW_PERSONAL_BEST
 } from "./pages.js";
+import { bestScoreRepository } from "./bestScoreRepository.js";
 
 export class TypingSession {
     constructor() {
@@ -259,14 +260,34 @@ export class TypingSession {
             this._typedCount = this._text.length;
         }
 
+        const wpm = this.getWpm();
+        const pageType = this._processWpm(wpm);
+
         displayTestCompletePage({
-            wpm: this.getWpm(),
+            wpm: wpm,
             accuracy: this.getAccuracy(),
             correctCount: this._typedCorrectlyCount,
             wrongCount: this.getErrorCount(),
-            pageType: TEST_COMPLETE_DEFAULT
-            //pageType: TEST_COMPLETE_FIRST_TEST
-            //pageType: TEST_COMPLETE_NEW_PERSONAL_BEST
+            pageType: pageType
         });
+    }
+
+    _processWpm(wpm){
+        const bestScore = bestScoreRepository.getBestScore();
+        let pageType = TEST_COMPLETE_FIRST_TEST;
+        if (bestScore != null){
+            if (wpm > bestScore){
+                bestScoreRepository.setBestScore(wpm);
+                pageType = TEST_COMPLETE_NEW_PERSONAL_BEST;
+            }
+            else{
+                pageType = TEST_COMPLETE_DEFAULT;
+            }
+        }
+        else{
+            bestScoreRepository.setBestScore(wpm);
+        }
+
+        return pageType
     }
 }
