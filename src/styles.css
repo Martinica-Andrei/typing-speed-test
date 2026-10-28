@@ -295,12 +295,10 @@ header {
 }
 
 .test-complete-section :is(.title, .description) {
-    position:relative;
     text-align: center;
 }
 
 .test-complete-results {
-    position:relative;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -380,7 +378,7 @@ div:has(#star-bottom) {
 div:has(#confetti) {
     position: relative;
     margin-top: -50px;
-    z-index: -1;
+    z-index: 0;
     overflow: hidden visible;
 }
 
