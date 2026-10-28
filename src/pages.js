@@ -1,3 +1,4 @@
+import { getAccuracyColor } from "./accuracyUtils.js";
 import { $ } from "./querySelector.js";
 
 export const TEST_COMPLETE_DEFAULT = 0;
@@ -46,7 +47,7 @@ export function displayTestCompletePage({ wpm, accuracy, correctCount, wrongCoun
 
     testCompleteWpmValueEl.textContent = wpm;
     testCompleteAccuracyValueEl.textContent = accuracy + "%";
-    testCompleteAccuracyValueEl.style.color = accuracy === 100 ? COLOR_GREEN : COLOR_RED;
+    testCompleteAccuracyValueEl.style.color = getAccuracyColor(accuracy);
     testCompleteCharactersCorrectEl.textContent = correctCount;
     testCompleteCharactersWrongEl.textContent = wrongCount;
 
