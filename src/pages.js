@@ -5,8 +5,7 @@ export const TEST_COMPLETE_DEFAULT = 0;
 export const TEST_COMPLETE_FIRST_TEST = 1;
 export const TEST_COMPLETE_NEW_PERSONAL_BEST = 2;
 
-const statisticsEl = $("#statistics");
-const optionsEl = $("#options");
+const headerRowEl = $("#header-row");
 const contentEl = $("#content");
 const contentBottomEl = $("#content-bottom");
 const testCompleteSectionEl = $("#test-complete-section");
@@ -28,16 +27,14 @@ const starTopEl = $("#star-top");
 
 
 export function displayMainPage() {
-    statisticsEl.style.display = "";
-    optionsEl.style.display = "";
+    headerRowEl.style.display = "";
     contentBottomEl.style.display = "";
     testCompleteSectionEl.style.display = "none";
     contentEl.classList.add("content");
 }
 
 export function displayTestCompletePage({ wpm, accuracy, correctCount, wrongCount, pageType }) {
-    statisticsEl.style.display = "none";
-    optionsEl.style.display = "none";
+    headerRowEl.style.display = "none";
     contentBottomEl.style.display = "none";
     testCompleteSectionEl.style.display = "";
     contentEl.classList.remove("content");
