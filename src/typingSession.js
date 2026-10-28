@@ -14,8 +14,8 @@ export class TypingSession {
         this._accuracyEl = $("#accuracy-value");
         this._timeEl = $("#time-value");
         this._textToTypeEl = $("#text-to-type");
-        this._textToTypeWithInput = $("#text-to-type-with-input");
-        this._textToTypeInput = $("#text-to-type-input");
+        this._textToTypeWithInputEl = $("#text-to-type-with-input");
+        this._textToTypeInputEl = $("#text-to-type-input");
         this._intervalId = null;
         this._state = TYPING_SESSION_STATE_MENU;
         this._currentTextIndex = 0;
@@ -110,8 +110,8 @@ export class TypingSession {
 
         this._textToTypeEl.scrollTop = 0;
         this._currentTimeMs = this._startTimeMs;
-        this._textToTypeInput.value = "";
-        this._textToTypeInput.focus();
+        this._textToTypeInputEl.value = "";
+        this._textToTypeInputEl.focus();
 
         this._highlightCurrentLetter();
 
@@ -236,7 +236,7 @@ export class TypingSession {
     }
 
     _addKeyEvent() {
-        let previousInputValue = this._textToTypeInput.value;
+        let previousInputValue = this._textToTypeInputEl.value;
         this._typeKeyHandlerWrapper = e => {
             const newInputValue = e.target.value;
             if (newInputValue.length > previousInputValue.length) {
@@ -249,7 +249,7 @@ export class TypingSession {
             previousInputValue = newInputValue;
         }
 
-        this._textToTypeInput.addEventListener("input", this._typeKeyHandlerWrapper);
+        this._textToTypeInputEl.addEventListener("input", this._typeKeyHandlerWrapper);
     }
 
     _removeKeyEvent() {
@@ -257,7 +257,7 @@ export class TypingSession {
             return;
         }
 
-        this._textToTypeInput.removeEventListener("input", this._typeKeyHandlerWrapper);
-        this._textToTypeInput.value = "";
+        this._textToTypeInputEl.removeEventListener("input", this._typeKeyHandlerWrapper);
+        this._textToTypeInputEl.value = "";
     }
 }
