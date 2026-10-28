@@ -5,9 +5,6 @@ export const TEST_COMPLETE_DEFAULT = 0;
 export const TEST_COMPLETE_FIRST_TEST = 1;
 export const TEST_COMPLETE_NEW_PERSONAL_BEST = 2;
 
-const COLOR_RED = window.getComputedStyle(document.body).getPropertyValue('--red-500');
-const COLOR_GREEN = window.getComputedStyle(document.body).getPropertyValue('--green-500');
-
 const statisticsEl = $("#statistics");
 const optionsEl = $("#options");
 const contentEl = $("#content");
