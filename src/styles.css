@@ -30,6 +30,9 @@ html {
 
 body {
     height: 100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center ;
     font-family: "Sora", sans-serif;
     font-size: 1rem;
     background-color: var(--neutral-900);
@@ -74,6 +77,11 @@ button:hover {
     display: flex;
     flex-direction: column;
     gap: 8px;
+}
+
+#content{
+    width: 100%;
+    max-width: 900px;
 }
 
 /* header
@@ -275,6 +283,11 @@ header {
 /* test-complete-section
 ----------------------------------------------------------------------------------- */
 
+.test-complete-section{
+    max-width: 900px;
+    width: 100%;
+}
+
 .test-complete-section .description {
     margin-top: 4px;
     font-size: 0.9rem;
@@ -322,6 +335,10 @@ div:has(.go-again-btn) {
     padding: 10px 12px;
     border-radius: 8px;
     font-weight: 600;
+}
+
+.go-again-btn:hover{
+    background-color: var(--neutral-400);
 }
 
 div:has(.test-complete-icon) {
@@ -432,5 +449,32 @@ div:has(#confetti) {
         display:flex;
         align-items: center;
         gap:8px;
+    }
+
+    .test-complete-results{
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .test-complete-result{
+        flex: 0 1 150px;
+    }
+
+    #star-top{
+        width: 30px;
+        height: 30px;
+    }
+
+    #star-bottom{
+        width: 64px;
+        height: 64px;
+    }
+
+    div:has(#confetti){
+        position:absolute;
+        left:0;
+        right:0;
+        bottom:0;
     }
 }
