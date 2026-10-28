@@ -23,5 +23,5 @@ function updateLogo(isDesktop){
 }
 
 function isDesktop(){
-    return window.innerWidth >= 1000;
+    return window.innerWidth >= 800;
 }

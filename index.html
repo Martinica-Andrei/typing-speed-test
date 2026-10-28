@@ -27,36 +27,39 @@
         <img src="assets/images/logo-small.svg" alt="" id="logo">
         <div class="personal-best">
           <img src="assets/images/icon-personal-best.svg" alt="">
-          <p class="personal-best"><span id="personal-best-text">Personal best:</span><span id="personal-best-value"></span></p>
+          <p class="personal-best"><span id="personal-best-text">Personal best:</span><span
+              id="personal-best-value"></span></p>
         </div>
       </header>
 
-      <section class="statistics" aria-label="Statistics" id="statistics">
-        <p>WPM: <span id="wpm-value"></span></p>
-        <p>Accuracy: <span id="accuracy-value"></span></p>
-        <p>Time: <span id="time-value"></span></p>
-      </section>
+      <div class="header-row">
+        <section class="statistics" aria-label="Statistics" id="statistics">
+          <p>WPM: <span id="wpm-value"></span></p>
+          <p>Accuracy: <span id="accuracy-value"></span></p>
+          <p>Time: <span id="time-value"></span></p>
+        </section>
 
-      <section class="options" aria-label="Options" id="options">
-        <div class="option">
-          <label for="difficulty" class="sr-only">Difficulty:</label>
-          <select id="difficulty">
-            <option value="easy">Easy</option>
-            <option value="medium" selected>Medium</option>
-            <option value="hard">Hard</option>
-          </select>
-        </div>
-        <div class="option">
-          <label for="mode" class="sr-only">Mode:</label>
-          <select id="mode">
-            <option value="passage" selected>Passage</option>
-            <option value="15">15s</option>
-            <option value="30">30s</option>
-            <option value="60">60s</option>
-            <option value="120">120s</option>
-          </select>
-        </div>
-      </section>
+        <section class="options" aria-label="Options" id="options">
+          <div class="option">
+            <label for="difficulty" class="sr-only desktop">Difficulty:</label>
+            <select id="difficulty">
+              <option value="easy">Easy</option>
+              <option value="medium" selected>Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </div>
+          <div class="option">
+            <label for="mode" class="sr-only desktop">Mode:</label>
+            <select id="mode">
+              <option value="passage" selected>Passage</option>
+              <option value="15">15s</option>
+              <option value="30">30s</option>
+              <option value="60">60s</option>
+              <option value="120">120s</option>
+            </select>
+          </div>
+        </section>
+      </div>
     </div>
 
     <div class="content-bottom" id="content-bottom">
