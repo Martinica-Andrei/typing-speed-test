@@ -18,6 +18,9 @@ const testCompleteCharactersWrongEl = $("#test-complete-characters-wrong");
 const testCompleteTitleEl = $("#test-complete-title");
 const testCompleteDescriptionEl = $("#test-complete-description");
 
+const confettiEl = $("#confetti");
+const starBottomEl = $("#star-bottom");
+
 const iconCompletedEl = $("#icon-completed");
 const iconNewPersonalBestEl = $("#icon-new-personal-best");
 const starTopEl = $("#star-top");
@@ -44,31 +47,44 @@ export function displayTestCompletePage({ wpm, accuracy, correctCount, wrongCoun
 
     switch (pageType) {
         case TEST_COMPLETE_FIRST_TEST:
-            showCompletedIcon();
+            displayCompletedIcon();
+            displayBottomStar();
             testCompleteTitleEl.textContent = "Baseline Established!";
             testCompleteDescriptionEl.textContent = "You've set the bar. Now the real challenge begins - time to beat it.";
             break;
         case TEST_COMPLETE_NEW_PERSONAL_BEST:
-            showPersonalBestIcon();
+            displayPersonalBestIcon();
+            displayConfetti();
             testCompleteTitleEl.textContent = "High Score Smashed!";
             testCompleteDescriptionEl.textContent = "You're getting faster. That was incredible typing.";
             break;
         default:
-            showCompletedIcon();
+            displayCompletedIcon();
+            displayBottomStar();
             testCompleteTitleEl.textContent = "Test Complete!";
             testCompleteDescriptionEl.textContent = "Solid run. Keep pushing to beat your high score.";
             break;
     }
 }
 
-function showCompletedIcon() {
+function displayCompletedIcon() {
     iconCompletedEl.style.display = "";
     iconNewPersonalBestEl.style.display = "none";
     starTopEl.style.display = "";
 }
 
-function showPersonalBestIcon() {
+function displayPersonalBestIcon() {
     iconCompletedEl.style.display = "none";
     iconNewPersonalBestEl.style.display = "";
     starTopEl.style.display = "none";
+}
+
+function displayConfetti(){
+    confettiEl.style.display = "";
+    starBottomEl.style.display = "none";
+}
+
+function displayBottomStar(){
+    confettiEl.style.display = "none";
+    starBottomEl.style.display = "";
 }
