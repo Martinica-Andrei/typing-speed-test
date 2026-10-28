@@ -30,9 +30,9 @@ html {
 
 body {
     height: 100%;
-    display:flex;
+    display: flex;
     flex-direction: column;
-    align-items: center ;
+    align-items: center;
     font-family: "Sora", sans-serif;
     font-size: 1rem;
     background-color: var(--neutral-900);
@@ -79,7 +79,7 @@ button:hover {
     gap: 8px;
 }
 
-#content{
+#content {
     width: 100%;
     max-width: 900px;
 }
@@ -283,9 +283,10 @@ header {
 /* test-complete-section
 ----------------------------------------------------------------------------------- */
 
-.test-complete-section{
+.test-complete-section {
     max-width: 900px;
     width: 100%;
+    display: none;
 }
 
 .test-complete-section .description {
@@ -337,7 +338,7 @@ div:has(.go-again-btn) {
     font-weight: 600;
 }
 
-.go-again-btn:hover{
+.go-again-btn:hover {
     background-color: var(--neutral-400);
 }
 
@@ -426,7 +427,7 @@ div:has(#confetti) {
         height: 25px;
     }
 
-    .statistics p:first-of-type{
+    .statistics p:first-of-type {
         padding-left: 0;
     }
 
@@ -441,45 +442,45 @@ div:has(#confetti) {
         border: unset;
     }
 
-    .options{
-        gap:24px;
+    .options {
+        gap: 24px;
     }
 
-    .option{
-        display:flex;
+    .option {
+        display: flex;
         align-items: center;
-        gap:8px;
+        gap: 8px;
     }
 
-    .test-complete-results{
+    .test-complete-results {
         flex-direction: row;
         justify-content: center;
         align-items: center;
     }
 
-    .test-complete-result{
+    .test-complete-result {
         flex: 0 1 150px;
     }
 
-    #star-top{
+    #star-top {
         width: 30px;
         height: 30px;
     }
 
-    #star-bottom{
+    #star-bottom {
         width: 64px;
         height: 64px;
     }
 
-    div:has(#confetti){
-        position:absolute;
-        left:0;
-        right:0;
+    div:has(#confetti) {
+        position: absolute;
+        left: 0;
+        right: 0;
     }
 }
 
-@media screen and (min-width:800px) and (min-height:725px){
-    div:has(#confetti){
+@media screen and (min-width:800px) and (min-height:725px) {
+    div:has(#confetti) {
         bottom: 0;
     }
 }

@@ -29,14 +29,14 @@ const starTopEl = $("#star-top");
 export function displayMainPage() {
     headerRowEl.style.display = "";
     contentBottomEl.style.display = "";
-    testCompleteSectionEl.style.display = "none";
+    testCompleteSectionEl.style.display = "";
     contentEl.classList.add("content");
 }
 
 export function displayTestCompletePage({ wpm, accuracy, correctCount, wrongCount, pageType }) {
     headerRowEl.style.display = "none";
     contentBottomEl.style.display = "none";
-    testCompleteSectionEl.style.display = "";
+    testCompleteSectionEl.style.display = "block";
     contentEl.classList.remove("content");
 
     testCompleteWpmValueEl.textContent = wpm;
